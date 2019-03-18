@@ -54,8 +54,7 @@ public class BotActivity extends AppCompatActivity {
         AIService aiService = AIService.getService(this, config);
 
         AIRequest aiRequest = new AIRequest();
-
-        aiService.setListener(this);
+        
 
         //Set the AIListener instance for the AIService instance.
         aiService.startListening();
