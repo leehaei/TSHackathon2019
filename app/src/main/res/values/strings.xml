@@ -113,4 +113,9 @@
     <string name="bottom">bottom</string>
     <string name="go">GO</string>
     <string name="textview">TextView</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="text">Text</string>
+    <string name="title_activity_splash_screen">splashScreen</string>
+    <string name="test">Test</string>
+    <string name="stopover">STOPOVER</string>
 </resources>

@@ -32,6 +32,8 @@ public class BotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
 
+        
+
         //Instance of AIConfiguration, specifying the access token, locale, and recognition engine.
         final AIConfiguration config = new AIConfiguration("f8ad05838e684915993f0f281ae0be85",
                 AIConfiguration.SupportedLanguages.English,
