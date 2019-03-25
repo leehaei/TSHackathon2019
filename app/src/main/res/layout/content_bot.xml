@@ -9,9 +9,7 @@
     <com.github.bassaer.chatmessageview.view.ChatView
         android:id="@+id/my_chat_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/chatReply"
@@ -22,15 +20,3 @@
     </com.github.bassaer.chatmessageview.view.ChatView>
 
 </FrameLayout>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:context="com.example.haeim.tshackathon2019.BotActivity"-->
-    <!--tools:showIn="@layout/activity_bot">-->
-
-<!--</android.support.constraint.ConstraintLayout>-->
