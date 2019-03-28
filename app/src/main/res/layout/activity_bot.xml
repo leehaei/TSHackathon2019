@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.haeim.tshackathon2019.BotActivity">
 
-    <com.github.bassaer.chatmessageview.view.ChatView
-        android:id="@+id/chat_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
-
     <include layout="@layout/content_bot" />
 
 

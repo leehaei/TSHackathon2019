@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.haeim.tshackathon2019.BotActivity">
 
-    <com.github.bassaer.chatmessageview.view.ChatView
-        android:id="@+id/my_chat_view"
+    <TextView
+        android:id="@+id/test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:text="@string/textview" />
 
-        <TextView
-            android:id="@+id/chatReply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/textview" />
-    </com.github.bassaer.chatmessageview.view.ChatView>
-
-</FrameLayout>
+</LinearLayout>
