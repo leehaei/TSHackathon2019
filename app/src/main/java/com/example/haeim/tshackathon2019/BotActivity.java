@@ -3,8 +3,12 @@ package com.example.haeim.tshackathon2019;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.UUID;
 
@@ -22,26 +26,23 @@ public class BotActivity extends AppCompatActivity {
     private AIRequest aiRequest;
     private String uuid = UUID.randomUUID().toString();
     private AIServiceContext customAIServiceContext;
+    private String sendResponse = "hi";
 
     private static final String TAG = "BotActivity";
-
-
-//    public interface AIListener {
-//        void getResponse(AIResponse aiResponse); // here process response
-//        void onError(AIError error); // here process error
-//        void onAudioLevel(float level); // callback for sound level visualization
-//        void onListeningStarted(); // indicate start listening here
-//        void onListeningCanceled(); // indicate stop listening here
-//        void onListeningFinished(); // indicate stop listening here
-//    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        init();
-
+        final Button sendButton = (Button) findViewById(R.id.button);
+        final TextView request = (TextView) findViewById(R.id.entered);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                sendResponse = request.getText().toString();
+                init();
+            }
+        });
     }
 
     private void init() {
@@ -58,7 +59,7 @@ public class BotActivity extends AppCompatActivity {
     }
 
     private void sendRequest () {
-        aiRequest.setQuery("hi");
+        aiRequest.setQuery(sendResponse);
         Request request = new Request(BotActivity.this, aiDataService, customAIServiceContext);
         request.execute(aiRequest);
 
@@ -69,6 +70,8 @@ public class BotActivity extends AppCompatActivity {
         Toast.makeText(BotActivity.this, "Response: " + response, Toast.LENGTH_LONG).show();
         Log.d(TAG, "Response: " + response);
     }
+
+
 
 
 }

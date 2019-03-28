@@ -13,4 +13,6 @@
     <string name="go">GO</string>
     <string name="textview">textview</string>
     <string name="stopover">stopover</string>
+    <string name="Send">Send</string>
+    <string name="EnterMessage">Enter Message</string>
 </resources>
