@@ -22,27 +22,24 @@ public class BotActivity extends AppCompatActivity {
     private AIRequest aiRequest;
     private String uuid = UUID.randomUUID().toString();
     private AIServiceContext customAIServiceContext;
+
     private static final String TAG = "BotActivity";
-    //TextView testing = (TextView) findViewById(R.id.test);
-
-/*
-    public interface AIListener {
-        void onResult(AIResponse result); // here process response
-        void onError(AIError error); // here process error
-        void onAudioLevel(float level); // callback for sound level visualization
-        void onListeningStarted(); // indicate start listening here
-        void onListeningCanceled(); // indicate stop listening here
-        void onListeningFinished(); // indicate stop listening here
 
 
-    }
-*/
+//    public interface AIListener {
+//        void getResponse(AIResponse aiResponse); // here process response
+//        void onError(AIError error); // here process error
+//        void onAudioLevel(float level); // callback for sound level visualization
+//        void onListeningStarted(); // indicate start listening here
+//        void onListeningCanceled(); // indicate stop listening here
+//        void onListeningFinished(); // indicate stop listening here
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        sendRequest();
         init();
 
     }
@@ -57,6 +54,7 @@ public class BotActivity extends AppCompatActivity {
         aiDataService = new AIDataService(this, config);
         customAIServiceContext = AIServiceContextBuilder.buildFromSessionId(uuid);
         aiRequest = new AIRequest();
+        sendRequest();
     }
 
     private void sendRequest () {
@@ -68,7 +66,6 @@ public class BotActivity extends AppCompatActivity {
 
     public void getResponse(AIResponse aiResponse) {
         String response = aiResponse.getResult().getFulfillment().getSpeech();
-        //testing.setText(response);
         Toast.makeText(BotActivity.this, "Response: " + response, Toast.LENGTH_LONG).show();
         Log.d(TAG, "Response: " + response);
     }
