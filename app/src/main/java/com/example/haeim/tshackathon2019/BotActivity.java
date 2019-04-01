@@ -2,6 +2,8 @@ package com.example.haeim.tshackathon2019;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,11 +32,17 @@ public class BotActivity extends AppCompatActivity {
 
     private static final String TAG = "BotActivity";
 
+    private RecyclerView botRecycler;
+    private BotAdapter botAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
+        botRecycler = (RecyclerView) findViewById(R.id.bot_recycler);
+        botAdapter = new BotAdapter(this, botList);
+        botRecycler.setLayoutManager(new LinearLayoutManager(this));
         final Button sendButton = (Button) findViewById(R.id.button);
         final TextView request = (TextView) findViewById(R.id.entered);
         sendButton.setOnClickListener(new View.OnClickListener() {
