@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import ai.api.AIServiceContext;
@@ -34,14 +36,16 @@ public class BotActivity extends AppCompatActivity {
 
     private RecyclerView botRecycler;
     private BotAdapter botAdapter;
+    private List messageList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        botRecycler = (RecyclerView) findViewById(R.id.bot_recycler);
-        botAdapter = new BotAdapter(this, botList);
+        messageList = new ArrayList();
+        botRecycler = (RecyclerView) findViewById(R.id.recycler_view_message_list);
+        botAdapter = new BotAdapter(this, messageList);
         botRecycler.setLayoutManager(new LinearLayoutManager(this));
         final Button sendButton = (Button) findViewById(R.id.button);
         final TextView request = (TextView) findViewById(R.id.entered);
