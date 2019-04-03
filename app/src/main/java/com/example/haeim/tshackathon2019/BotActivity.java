@@ -5,8 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,28 +35,30 @@ public class BotActivity extends AppCompatActivity {
     private AIRequest aiRequest;
     private String uuid = UUID.randomUUID().toString();
     private AIServiceContext customAIServiceContext;
-    private String sendResponse = "hi";
+    private String sendResponse;
 
     private static final String TAG = "BotActivity";
 
-    private RecyclerView botRecycler;
-    private BotAdapter botAdapter;
-    private List messageList;
+    private static final int USER = 0;
+    private static final int BOT = 1;
 
+    private LinearLayout chatLayout;
+    private EditText queryEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bot);
-        messageList = new ArrayList();
-        botRecycler = (RecyclerView) findViewById(R.id.recycler_view_message_list);
-        botAdapter = new BotAdapter(this, messageList);
-        botRecycler.setLayoutManager(new LinearLayoutManager(this));
+        chatLayout = findViewById(R.id.chatLayout);
         final Button sendButton = (Button) findViewById(R.id.button);
-        final TextView request = (TextView) findViewById(R.id.entered);
+        //final TextView request = (TextView) findViewById(R.id.queryEditText);
+
+        //ImageView sendBtn = findViewById(R.id.sendBtn);
+
+        queryEditText = findViewById(R.id.queryEditText);
         sendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                sendResponse = request.getText().toString();
+                sendResponse = queryEditText.getText().toString();
                 init();
             }
         });
@@ -74,17 +81,46 @@ public class BotActivity extends AppCompatActivity {
         aiRequest.setQuery(sendResponse);
         Request request = new Request(BotActivity.this, aiDataService, customAIServiceContext);
         request.execute(aiRequest);
-
+        sendMessage(sendResponse, USER);
+        queryEditText.setText("");
     }
 
     public void getResponse(AIResponse aiResponse) {
         String response = aiResponse.getResult().getFulfillment().getSpeech();
         Toast.makeText(BotActivity.this, "Response: " + response, Toast.LENGTH_LONG).show();
-        Log.d(TAG, "Response: " + response);
+        sendMessage(response, BOT);
     }
 
+    private void sendMessage(String message, int type) {
+        FrameLayout layout;
+        switch(type) {
+            case USER:
+                layout = userLayout();
+                break;
+            case BOT:
+                layout = botLayout();
+                break;
+            default:
+                layout = botLayout();
+                break;
+        }
+        layout.setFocusableInTouchMode(true);
+        chatLayout.addView(layout);
+        TextView tView = layout.findViewById(R.id.chatMsg);
+        tView.setText(message);
+        layout.requestFocus();
+        queryEditText.requestFocus();
+    }
 
+    FrameLayout userLayout() {
+        LayoutInflater inflater = LayoutInflater.from(BotActivity.this);
+        return (FrameLayout) inflater.inflate(R.layout.usersent, null);
+    }
 
+    FrameLayout botLayout() {
+        LayoutInflater inflater = LayoutInflater.from(BotActivity.this);
+        return (FrameLayout) inflater.inflate(R.layout.botreceived, null);
+    }
 
 }
 
